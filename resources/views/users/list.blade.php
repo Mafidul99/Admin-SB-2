@@ -9,7 +9,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Users</h1>
-        <a href="{{route('users.create')}}" class="btn btn-sm btn-success" >
+        <a href="{{route('users.create')}}" class="btn btn-sm btn-warning" >
             <i class="fas fa-plus"></i> Add New
         </a>
     </div>
@@ -39,9 +39,22 @@
                                <td>{{$user->name}}</td>
                                <td>{{$user->email}}</td>
                                <td style="display: flex">
-                                   <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-success btn-sm m-2">
-                                        <i class="fa fa-pen"></i>
+                                   <a href="{{ route('users.edit', ['user' => $user->id]) }}"
+                                    class="btn btn-success btn-sm m-2">
+                                    <i class="fa fa-pen"></i>
                                    </a>
+                                   @if ($user->status == 1)
+
+                                   <a href="{{ route('users.status.update', ['user_id' => $user->id, 'status_code' => 0]) }}"
+                                    class="btn btn-danger btn-sm m-2">
+                                    <i class="fa fa-ban"></i>
+                                   </a>
+                                   @else
+                                   <a href="{{ route('users.status.update', ['user_id' => $user->id, 'status_code' => 1]) }}"
+                                    class="btn btn-success btn-sm m-2">
+                                    <i class="fa fa-check"></i>
+                                   </a>
+                                   @endif
                                    <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}">
                                         @csrf
                                         @method('DELETE')
