@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -29,3 +31,16 @@ Route::middleware('auth')->group(function(){
     Route::get('/users/status/{user_id}/{status_code}', [UserController::class, 'updateStatus'])->name('users.status.update');
 });
 
+/// facebook Login url
+
+Route::prefix('facebook')->name('facebook.')->group( function(){
+    Route::get('auth', [FacebookController::class, 'loginUsingFacebook'])->name('login');
+    Route::get('callback', [FacebookController::class, 'callbackFromFacebook'])->name('callback');
+});
+
+/// google Login url
+
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});

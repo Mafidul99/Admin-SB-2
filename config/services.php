@@ -30,4 +30,18 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'ciient_id' => '',
+        'ciient_secret' => '',
+        'rediect' => 'http://127.0.0.1:8000/facebook/callback/',
+    ],
+
+    'google' => [
+        'ciient_id' => '',
+        'ciient_secret' => '',
+        'rediect' => 'http://127.0.0.1:8000/google/callback/',
+    ],
+
+
+
 ];
